@@ -1,0 +1,15 @@
+#counterId{
+ font-size: 35px;
+ margin-left: 10px;
+ letter-spacing: 5px;
+}
+
+#button{
+ margin-top: 10px;
+ padding-top: 10px;
+ font-size: 15px;
+}
+
+#startId, #stopId, #resetId{
+ padding: 10px;
+}
