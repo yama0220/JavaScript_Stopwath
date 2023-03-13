@@ -8,8 +8,8 @@ var startTime;
 var stopTime = 0;
 var timeoutId;
 
+let h = 0;
 let m = 0;
-let ten = 0;
 let s = 0;
 let ms = 0;
 
@@ -41,8 +41,8 @@ function stop(){
 function reset(){
   stop();
   counter.textContent = '0:0:0:0';
+  h = 0;
   m = 0;
-  ten = 0;
   s = 0;
   ms = 0;
   stopTime = 0;
@@ -54,16 +54,14 @@ function reset(){
 //スタート押下時に呼び出される
 function displayTime(){
   var t = new Date(Date.now() - startTime + stopTime);
-  m = String(t.getMinutes()).padStart(1, '0');
-  ten = String(t.getSeconds());
-  s = String(t.getSeconds()).slice(-1);
-  ms = String(t.getMilliseconds()).slice(0, 1);
-  //1秒と10秒単位の切り離し
-  if(ten < 10){
-    counter.textContent = `${m}:0:${s}:${ms}`;
-  }
-  else{
-    counter.textContent = `${m}:${ten.slice(0,1)}:${s}:${ms}`;
+  h = String(t.getUTCHours()).padStart(1, 0);
+  m = String(t.getMinutes()).padStart(1,0);
+  s = String(t.getSeconds()).padStart(1,0);
+  ms = String(t.getMilliseconds()).slice(-3,-2);
+  if(ms == 0){
+    counter.textContent = `${h}:${m}:${s}:0`;
+  } else {
+    counter.textContent = `${h}:${m}:${s}:${ms}`;
   }
   timeoutId = setTimeout(displayTime, 10);
 };
